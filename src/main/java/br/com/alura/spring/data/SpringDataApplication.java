@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.alura.spring.data.service.EmployeeService;
+import br.com.alura.spring.data.service.ReportsService;
 import br.com.alura.spring.data.service.RoleService;
 import br.com.alura.spring.data.service.WorkUnityService;
 
@@ -20,6 +21,8 @@ public class SpringDataApplication implements CommandLineRunner {
 	private WorkUnityService workUnityService;
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private ReportsService reportsService;
 	
 	private static Boolean RUNNING;
 
@@ -35,7 +38,7 @@ public class SpringDataApplication implements CommandLineRunner {
 			RUNNING = true;
 			while (RUNNING) {
 				System.out.println("Choose your action:");
-				System.out.println("0 - Quit");
+				System.out.println("00 - Quit");
 				System.out.println("01 - Add Role");
 				System.out.println("02 - Update Role");
 				System.out.println("03 - Delete Role");
@@ -46,6 +49,8 @@ public class SpringDataApplication implements CommandLineRunner {
 				System.out.println("12 - Update Employee");
 				System.out.println("13 - Delete Employee");
 				System.out.println("14 - List All Employees");
+				System.out.println("15 - List Employees by name");
+				System.out.println("16 - List Employees by name, salary and hiring date");
 				
 				System.out.println("------------------------");
 				System.out.println("21 - Add Work Unity");
@@ -77,6 +82,12 @@ public class SpringDataApplication implements CommandLineRunner {
 				
 				else if (action == 14)
 					employeeService.userListEmployees();
+				
+				else if (action == 15)
+					reportsService.findEmployeeByName(scan);
+				
+				else if (action == 16)
+					reportsService.findEmployeeByNameAndSalaryAndHiringDate(scan);
 				
 				else if (action == 21) 
 					workUnityService.userCreateWorkUnity(scan);

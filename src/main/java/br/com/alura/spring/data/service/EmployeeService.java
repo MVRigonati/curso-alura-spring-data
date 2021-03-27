@@ -1,6 +1,5 @@
 package br.com.alura.spring.data.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.alura.spring.data.orm.EmployeeEntity;
 import br.com.alura.spring.data.repository.EmployeeRepository;
+import br.com.alura.spring.data.util.DateUtil;
 
 @Service
 public class EmployeeService {
@@ -23,7 +23,7 @@ public class EmployeeService {
 		final String cpf = scan.next();
 		System.out.println("Type the salary: ");
 		final String salary = scan.next();
-		final Date hiringDate = readDate("Type the hiringDate (dd/mm/yyyy): ", scan);
+		final Date hiringDate = DateUtil.readDate("Type the hiringDate (dd/mm/yyyy): ", scan);
 		System.out.println("Type the role ID for this employee: ");
 		final Integer roleId = scan.nextInt();
 
@@ -44,26 +44,6 @@ public class EmployeeService {
 		}
 	}
 
-	private Date readDate(final String firstMessage, final Scanner scan) {
-		Date hiringDate = null;
-		
-		boolean isValidDate = false;
-		while (!isValidDate) {
-			System.out.println(firstMessage);
-			final String hiringDateString = scan.next();
-			
-			try {
-				hiringDate = new SimpleDateFormat("dd/MM/yyyy").parse(hiringDateString);
-				isValidDate = true;
-			} catch (Exception ex) {
-				System.out.println("This isn't a valid date, example 21/12/2020.");
-				isValidDate = false;
-			}
-		}
-		
-		return hiringDate; 
-	}
-	
 	public void userUpdateEmployee(final Scanner scan) {
 		System.out.println("Type the ID: ");
 		final Long id = Integer.toUnsignedLong(scan.nextInt());
@@ -74,7 +54,7 @@ public class EmployeeService {
 		final String cpf = scan.next();
 		System.out.println("Type the new salary: ");
 		final String salary = scan.next();
-		final Date hiringDate = readDate("Type the new hiringDate (dd/mm/yyyy): ", scan);
+		final Date hiringDate = DateUtil.readDate("Type the new hiringDate (dd/mm/yyyy): ", scan);
 		System.out.println("Type the new role ID for this employee: ");
 		final Integer roleId = scan.nextInt();
 		
