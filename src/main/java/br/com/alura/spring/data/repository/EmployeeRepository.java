@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import br.com.alura.spring.data.orm.EmployeeEntity;
 
-public interface EmployeeRepository extends CrudRepository<EmployeeEntity, Long> {
+public interface EmployeeRepository extends PagingAndSortingRepository<EmployeeEntity, Long> {
 	
 	public List<EmployeeEntity> findByNameLike(String name);
 	

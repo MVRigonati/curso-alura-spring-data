@@ -81,7 +81,7 @@ public class SpringDataApplication implements CommandLineRunner {
 					employeeService.userDeleteEmployee(scan);
 				
 				else if (action == 14)
-					employeeService.userListEmployees();
+					employeeService.userListEmployees(scan);
 				
 				else if (action == 15)
 					reportsService.findEmployeeByName(scan);

@@ -1,9 +1,15 @@
 package br.com.alura.spring.data.service;
 
+import static org.springframework.data.domain.Sort.Direction.ASC;
+
 import java.util.Date;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.spring.data.orm.EmployeeEntity;
@@ -74,12 +80,30 @@ public class EmployeeService {
 		System.out.println();
 	}
 	
-	public void userListEmployees() {
-		Iterable<EmployeeEntity> allEmployees = repository.findAll();
+	public void userListEmployees(final Scanner scan) {
 		
-		System.out.println();
-		allEmployees.forEach(employee -> System.out.println(employee));
-		System.out.println();
+		System.out.println("Enter the page you want to see.");
+		final int page = scan.nextInt();
+		
+		if (page > 0) {
+
+			Pageable pageConfig = PageRequest.of((page - 1), 5, Sort.by(ASC, "name"));
+			Page<EmployeeEntity> allEmployeesPage = repository.findAll(pageConfig);
+
+			final int lastShowingIndex = page * allEmployeesPage.getSize();
+			final int firstShowingIndex = lastShowingIndex - allEmployeesPage.getSize() + 1;
+			System.out.println();
+			System.out.println("Showing " + firstShowingIndex + " to " + lastShowingIndex +
+					" / Total: " + allEmployeesPage.getTotalElements());
+			allEmployeesPage.forEach(employee -> System.out.println(employee));
+			System.out.println();
+
+		} else {
+			System.out.println();
+			System.out.println("Page number must be greater than 0.");
+			System.out.println();
+		}
+		 
 	}
 	
 }
