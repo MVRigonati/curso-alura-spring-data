@@ -8,6 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import br.com.alura.spring.data.orm.EmployeeEntity;
+import br.com.alura.spring.data.orm.MainEmployeeAttributesProjection;
 
 public interface EmployeeRepository extends PagingAndSortingRepository<EmployeeEntity, Long> {
 	
@@ -21,4 +22,7 @@ public interface EmployeeRepository extends PagingAndSortingRepository<EmployeeE
 	/* For native queries
 	@Query(value = "SELECT ...", nativeQuery = true)
 	*/
+	
+	@Query(value = "SELECT name, cpf, salary FROM EMPLOYEES", nativeQuery = true)
+	public List<MainEmployeeAttributesProjection> findAllNameAndCpfAndSalary();
 }

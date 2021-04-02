@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.spring.data.orm.EmployeeEntity;
+import br.com.alura.spring.data.orm.MainEmployeeAttributesProjection;
 import br.com.alura.spring.data.repository.EmployeeRepository;
 import br.com.alura.spring.data.util.DateUtil;
 
@@ -38,6 +39,16 @@ public class ReportsService {
 		
 		System.out.println();
 		System.out.println(employees.toString());
+		System.out.println();
+	}
+	
+	public void findNameAndCpfAndSalaryFromEmployee() {
+		final List<MainEmployeeAttributesProjection> employees = employeeRepository.findAllNameAndCpfAndSalary();
+		
+		System.out.println();
+		employees.forEach(e -> {
+			System.out.println("Name: " + e.getName() + " - CPF: " + e.getCpf() + " - Salary: " + e.getSalary());
+		});
 		System.out.println();
 	}
 
