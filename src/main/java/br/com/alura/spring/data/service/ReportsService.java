@@ -1,5 +1,9 @@
 package br.com.alura.spring.data.service;
 
+import static br.com.alura.spring.data.specification.Employee.nameLike;
+import static br.com.alura.spring.data.specification.Employee.cpf;
+import static org.springframework.data.jpa.domain.Specification.where;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -50,6 +54,25 @@ public class ReportsService {
 			System.out.println("Name: " + e.getName() + " - CPF: " + e.getCpf() + " - Salary: " + e.getSalary());
 		});
 		System.out.println();
+	}
+	
+	public void findByNameDynamic(final Scanner scan) {
+		
+		System.out.println("Enter the name to search");
+		String nameToSearch = scan.next();
+		
+		System.out.println("Enter the CPF to search");
+		String cpfToSearch = scan.next();
+		
+		final List<EmployeeEntity> result = employeeRepository.findAll(where(
+				nameLike(nameToSearch)
+				.or(cpf(cpfToSearch))
+			));
+		
+		System.out.println();
+		result.forEach(System.out::println);
+		System.out.println();
+		
 	}
 
 }

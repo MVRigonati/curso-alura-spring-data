@@ -52,6 +52,7 @@ public class SpringDataApplication implements CommandLineRunner {
 				System.out.println("15 - List Employees by name");
 				System.out.println("16 - List Employees by name, salary and hiring date");
 				System.out.println("17 - List Name, CPF and Salary from Employees");
+				System.out.println("18 - List Employees by name dynamic");
 				
 				System.out.println("------------------------");
 				System.out.println("21 - Add Work Unity");
@@ -92,6 +93,9 @@ public class SpringDataApplication implements CommandLineRunner {
 				
 				else if (action == 17)
 					reportsService.findNameAndCpfAndSalaryFromEmployee();
+				
+				else if (action == 18)
+					reportsService.findByNameDynamic(scan);
 				
 				else if (action == 21) 
 					workUnityService.userCreateWorkUnity(scan);
